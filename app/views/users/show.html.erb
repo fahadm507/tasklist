@@ -1,7 +1,24 @@
 
-<%= @user %>
-<% @user.tasks.each do |task| %>
-  <%= task.name %>
-  <%= task.decription %>
-  <%= task.due_date %>
-<% end %>
+<h2><%= @user.first_name %> <%= @user.last_name %></h2> <br>
+<hr>
+<h3>My tasks</h3>
+  <ul>
+  <% @user.tasks.order(created_at: :desc).each do |task|%>
+    <li><%= task.name %></li>
+    <li><%= task.description %></li>
+    <li><%= task.due_date %></li>
+  <%end%>
+  </ul>
+<h5>New task:</h5>
+  <%= form_for [@user,@task] do |f| %>
+  <%= f.label :name, "Task Name: " %><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :description, "Task Description: " %><br>
+  <%= f.text_field :description %><br>
+
+  <%= f.label :due_date, "Due date: " %><br>
+  <%= f.text_field :due_date %><br>
+
+  <%= f.submit %>
+  <%end%>

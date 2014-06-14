@@ -1,23 +1,27 @@
 class TasksController < ApplicationController
 
-  def index
-    @tasks = Task.new
-  end
-
+  # def index
+  #   @tasks = Task.all
+  # end
   def create
-    @task = Task.new(task_paramss)
+
+    @user = User.find(params[:user_id])
+    @task = @user.tasks.build(task_params)
     if @task.save
-      flash[:notice]= "You task has been saved succesfully"
-      redirect_to user_path
+      redirect_to "/users/#{@user.id}"
     else
       flash[:notice]= "You entered invalid input, try again"
-      render :new
+      render :'users/show'
     end
   end
 
-  def show
-    @task = Task.find(params[:id])
-  end
+  # def new
+  #   @task = Task.new
+  # end
+
+  # def show
+  #   @task = Task.find(params[:id])
+  # end
 
   private
 
