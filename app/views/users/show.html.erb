@@ -1,0 +1,7 @@
+
+<%= @user %>
+<% @user.tasks.each do |task| %>
+  <%= task.name %>
+  <%= task.decription %>
+  <%= task.due_date %>
+<% end %>
