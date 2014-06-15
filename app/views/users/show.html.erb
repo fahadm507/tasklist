@@ -1,16 +1,8 @@
 
-<h2><%= @user.first_name %> <%= @user.last_name %></h2> <br>
+<h2><%= @user.first_name %> <%= @user.last_name %></h2>
 <hr>
-<h3>My tasks</h3>
-  <ul>
-  <% @user.tasks.order(created_at: :desc).each do |task|%>
-    <li><%= task.name %></li>
-    <li><%= task.description %></li>
-    <li><%= task.due_date %></li>
-  <%end%>
-  </ul>
 <h5>New task:</h5>
-  <%= form_for [@user,@task] do |f| %>
+  <%= form_for [@user, @task] do |f| %>
   <%= f.label :name, "Task Name: " %><br>
   <%= f.text_field :name %><br>
 
@@ -22,3 +14,13 @@
 
   <%= f.submit %>
   <%end%>
+<h3>My tasks</h3>
+  <ol>
+  <% @user.tasks.order(created_at: :desc).each do |task|%>
+    <li><%= task.name %></li>
+    <p><%= task.description %></p>
+    <p><%= task.due_date %></p>
+    <p><%= link_to 'Destroy', user_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></td></p>
+  <%end%>
+  </ol>
+
