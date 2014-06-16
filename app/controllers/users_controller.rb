@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @task = Task.find(params[:id])
     @task.destroy
 
-    redirect_to '/users'
+    redirect_to users_path
   end
 
   def create
@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   private
 
+  def
   def user_params
     params.require(:user).permit(:email, :first_name, :last_name)
   end
